@@ -44,7 +44,8 @@ func TWDataCreateWithGoBytes(d []byte) unsafe.Pointer {
 
 func main() {
     coin := os.Args[1]
-    // index := os.Args[2]
+    index := os.Args[2]
+
     types := map[string]uint32{
     "ae":C.TWCoinTypeAeternity ,
     "aion" : C.TWCoinTypeAion ,
@@ -105,6 +106,7 @@ func main() {
     "fil" : C.TWCoinTypeFilecoin ,
     "egld" : C.TWCoinTypeElrond ,
     "band" : C.TWCoinTypeBandChain ,
+    "smartchain":TWCoinTypeSmartChain,
     "bsc" : C.TWCoinTypeSmartChainLegacy };
 
     str := TWStringCreateWithGoString("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair")
@@ -115,6 +117,11 @@ func main() {
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    address := C.TWHDWalletGetAddressForCoin(wallet, types[coin])
-    fmt.Println("<== address: ", TWStringGoString(address))
+    key := C.TWHDWalletGetDerivedKey(wallet, types[coin], 0, 0 ,index )
+    keyData := C.TWPrivateKeyData(key)
+    keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
+    fmt.Println("private key: ", keyHex)
+    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], keyHex));
+
+    fmt.Println("address:", TWStringGoString(address))
 }
