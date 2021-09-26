@@ -1,8 +1,10 @@
+
 coins=('btc' 'eth')
 for coin in "${coins[@]}"
 do
-    for (( c=1; c<=5; c++ ))
+    for (( c=1; c<=2; c++ ))
     do  
-    echo "Welcome $c times $coin"
+    /wallet-core/build/walletconsole/walletconsole
+    coin "${coin}"
     done
 done
