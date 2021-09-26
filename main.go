@@ -109,7 +109,7 @@ func main() {
     "egld" : C.TWCoinTypeElrond ,
     "band" : C.TWCoinTypeBandChain ,
     "bsc" : C.TWCoinTypeSmartChainLegacy ,
-    "bnb" : C.TWCoinTypeSmartChain};
+    "bsc" : C.TWCoinTypeSmartChain};
 
     str := TWStringCreateWithGoString("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair")
     emtpy := TWStringCreateWithGoString("")
