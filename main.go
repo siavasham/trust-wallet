@@ -9,10 +9,9 @@ import "os"
 // #include <TrustWalletCore/TWPrivateKey.h>
 // #include <TrustWalletCore/TWPublicKey.h>
 import "C"
-
 import "fmt"
 import "unsafe"
-// import "encoding/hex"
+import "encoding/hex"
 
 // C.TWString -> Go string
 func TWStringGoString(s unsafe.Pointer) string {
@@ -118,11 +117,10 @@ func main() {
     defer C.TWHDWalletDelete(wallet)
 
     key := C.TWHDWalletGetDerivedKey(wallet, types[coin], 0, 0 ,index )
-    defer C.TWStringDelete(key)
     keyData := C.TWPrivateKeyData(key)
     keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
     fmt.Println("private key: ", keyHex)
-    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], keyHex));
 
+    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], keyHex));
     fmt.Println("address:", TWStringGoString(address))
 }
