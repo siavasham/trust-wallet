@@ -12,7 +12,7 @@ import "C"
 
 import "fmt"
 import "unsafe"
-import "encoding/hex"
+// import "encoding/hex"
 
 // C.TWString -> Go string
 func TWStringGoString(s unsafe.Pointer) string {
