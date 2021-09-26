@@ -110,15 +110,7 @@ func main() {
     "band" : C.TWCoinTypeBandChain ,
     "bsc" : C.TWCoinTypeSmartChainLegacy ,
     "bnb" : C.TWCoinTypeSmartChain ,
-    "matic" : C.TWCoinTypePolygon ,
-    "p" : C.TWCoinTypeBluzelle ,
-    "o" : C.TWCoinTypeOptimism ,
-    "m" : C.TWCoinTypeArbitrum ,
-    "n" : C.TWCoinTypeECOChain ,
-    "q" : C.TWCoinTypeAvalancheCChain ,
-    "y" : C.TWCoinTypeXDai ,
-    "x" : C.TWCoinTypeFantom ,
-    "z" : C.TWCoinTypeCryptoOrg };
+    "matic" : C.TWCoinTypePolygon };
 
     str := TWStringCreateWithGoString("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair")
     emtpy := TWStringCreateWithGoString("")
