@@ -1,5 +1,9 @@
 package main
-
+	
+import (
+    "fmt"
+    "os"
+)
 // #cgo CFLAGS: -I/wallet-core/include
 // #cgo LDFLAGS: -L/wallet-core/build -L/wallet-core/build/trezor-crypto -lTrustWalletCore -lprotobuf -lTrezorCrypto -lc++ -lm
 // #include <TrustWalletCore/TWHDWallet.h>
@@ -42,28 +46,88 @@ func TWDataCreateWithGoBytes(d []byte) unsafe.Pointer {
 }
 
 func main() {
-    fmt.Println("==> calling wallet core from go")
-    str := TWStringCreateWithGoString("confirm bleak useless tail chalk destroy horn step bulb genuine attract split")
+    coin := os.Args[1]
+    index := os.Args[2]
+    types := map[string]int{
+    "ae":C.TWCoinTypeAeternity ,
+    "aion" : C.TWCoinTypeAion ,
+    "bnb" : C.TWCoinTypeBinance ,
+    "btc" : C.TWCoinTypeBitcoin ,
+    "bch" : C.TWCoinTypeBitcoinCash ,
+    "btg" : C.TWCoinTypeBitcoinGold ,
+    "clo" : C.TWCoinTypeCallisto ,
+    "ada" : C.TWCoinTypeCardano , 
+    "atom" : C.TWCoinTypeCosmos ,
+    "dash" : C.TWCoinTypeDash ,
+    "dcr" : C.TWCoinTypeDecred ,
+    "dgb" :  C.TWCoinTypeDigiByte ,
+    "doge" : C.TWCoinTypeDogecoin ,
+    "eos" : C.TWCoinTypeEOS ,
+    "eth" : C.TWCoinTypeEthereum ,
+    "etc" : C.TWCoinTypeEthereumClassic ,
+    "fio" : C.TWCoinTypeFIO ,
+    "go" : C.TWCoinTypeGoChain ,
+    "grs" : C.TWCoinTypeGroestlcoin ,
+    "icx" : C.TWCoinTypeICON ,
+    "iotx" : C.TWCoinTypeIoTeX ,
+    "kava" : C.TWCoinTypeKava ,
+    "kin" : C.TWCoinTypeKin ,
+    "ltc" : C.TWCoinTypeLitecoin ,
+    "mona" : C.TWCoinTypeMonacoin ,
+    "nas" : C.TWCoinTypeNebulas ,
+    "nuls" : C.TWCoinTypeNULS ,
+    "nano" : C.TWCoinTypeNano ,
+    "near" : C.TWCoinTypeNEAR ,
+    "nim" : C.TWCoinTypeNimiq ,
+    "ont" : C.TWCoinTypeOntology ,
+    "poa" : C.TWCoinTypePOANetwork ,
+    "qtum" : C.TWCoinTypeQtum ,
+    "xrp" : C.TWCoinTypeXRP ,
+    "sol" : C.TWCoinTypeSolana ,
+    "xlm" : C.TWCoinTypeStellar ,
+    "xtz" : C.TWCoinTypeTezos ,
+    "theta" : C.TWCoinTypeTheta ,
+    "tt" : C.TWCoinTypeThunderToken ,
+    "neo" : C.TWCoinTypeNEO ,
+    "tomo" : C.TWCoinTypeTomoChain ,
+    "trx" : C.TWCoinTypeTron ,
+    "vet" : C.TWCoinTypeVeChain ,
+    "via" : C.TWCoinTypeViacoin ,
+    "wan" : C.TWCoinTypeWanchain ,
+    "zec" : C.TWCoinTypeZcash ,
+    "firo" : C.TWCoinTypeZcoin ,
+    "zil" : C.TWCoinTypeZilliqa ,
+    "zel" : C.TWCoinTypeZelcash ,
+    "rvn" : C.TWCoinTypeRavencoin ,
+    "waves" : C.TWCoinTypeWaves ,
+    "luna" : C.TWCoinTypeTerra ,
+    "one" : C.TWCoinTypeHarmony ,
+    "algo" : C.TWCoinTypeAlgorand ,
+    "ksm" : C.TWCoinTypeKusama ,
+    "dot" : C.TWCoinTypePolkadot ,
+    "fil" : C.TWCoinTypeFilecoin ,
+    "egld" : C.TWCoinTypeElrond ,
+    "band" : C.TWCoinTypeBandChain ,
+    "bsc" : C.TWCoinTypeSmartChainLegacy ,
+    "bnb" : C.TWCoinTypeSmartChain ,
+    "matic" : C.TWCoinTypePolygon ,
+    "p" : C.TWCoinTypeBluzelle ,
+    "o" : C.TWCoinTypeOptimism ,
+    "m" : C.TWCoinTypeArbitrum ,
+    "n" : C.TWCoinTypeECOChain ,
+    "q" : C.TWCoinTypeAvalancheCChain ,
+    "y" : C.TWCoinTypeXDai ,
+    "x" : C.TWCoinTypeFantom ,
+    "z" : C.TWCoinTypeCryptoOrg };
+
+    str := TWStringCreateWithGoString("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair")
     emtpy := TWStringCreateWithGoString("")
     defer C.TWStringDelete(str)
     defer C.TWStringDelete(emtpy)
 
-    fmt.Println("<== mnemonic is valid: ", C.TWHDWalletIsValid(str))
-
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    key := C.TWHDWalletGetKeyForCoin(wallet, C.TWCoinTypeBitcoin)
-    keyData := C.TWPrivateKeyData(key)
-    keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
-    fmt.Println("<== bitcoin private key: ", keyHex)
-
-    pubKey, _ := hex.DecodeString("0288be7586c41a0498c1f931a0aaf08c15811ee2651a5fe0fa213167dcaba59ae8")
-    pubKeyData := TWDataCreateWithGoBytes(pubKey)
-    defer C.TWDataDelete(pubKeyData)
-
-    fmt.Println("<== bitcoin public key is valid: ", C.TWPublicKeyIsValid(pubKeyData, C.TWPublicKeyTypeSECP256k1))
-
-    address := C.TWHDWalletGetAddressForCoin(wallet, C.TWCoinTypeBitcoin)
-    fmt.Println("<== bitcoin address: ", TWStringGoString(address))
+    address := C.TWHDWalletGetAddressForCoin(wallet, types[coin])
+    fmt.Println("<== address: ", TWStringGoString(address))
 }
