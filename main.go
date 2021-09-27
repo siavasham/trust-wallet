@@ -7,10 +7,10 @@ import "os"
 // #include <TrustWalletCore/TWData.h>
 // #include <TrustWalletCore/TWPrivateKey.h>
 // #include <TrustWalletCore/TWPublicKey.h>
-import "C"
 import "fmt"
 import "unsafe"
 import "encoding/hex"
+import "C"
 
 // C.TWString -> Go string
 func TWStringGoString(s unsafe.Pointer) string {
