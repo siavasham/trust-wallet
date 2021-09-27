@@ -1,11 +1,11 @@
 package main
-// #cgo CFLAGS: -I/wallet-core/include
-// #cgo LDFLAGS: -L/wallet-core/build -L/wallet-core/build/trezor-crypto -lTrustWalletCore -lprotobuf -lTrezorCrypto -lc++ -lm
-// #include <TrustWalletCore/TWHDWallet.h>
-// #include <TrustWalletCore/TWString.h>
-// #include <TrustWalletCore/TWData.h>
-// #include <TrustWalletCore/TWPrivateKey.h>
-// #include <TrustWalletCore/TWPublicKey.h>
+#cgo CFLAGS: -I/wallet-core/include
+#cgo LDFLAGS: -L/wallet-core/build -L/wallet-core/build/trezor-crypto -lTrustWalletCore -lprotobuf -lTrezorCrypto -lc++ -lm
+#include <TrustWalletCore/TWHDWallet.h>
+#include <TrustWalletCore/TWString.h>
+#include <TrustWalletCore/TWData.h>
+#include <TrustWalletCore/TWPrivateKey.h>
+#include <TrustWalletCore/TWPublicKey.h>
 import "C"
 import "fmt"
 import "unsafe"
@@ -115,7 +115,7 @@ func main() {
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    key = C.TWHDWalletGetKey(wallet, types[coin], "m/84'/0'/0'/0/1" )
+    key = C.TWHDWalletGetDerivedKey(wallet, types[coin], 0, 0 ,0 )
     defer C.free(unsafe.Pointer(key))
     keyData := C.TWPrivateKeyData(key)
     keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
