@@ -7,7 +7,6 @@ package main
 // #include <TrustWalletCore/TWData.h>
 // #include <TrustWalletCore/TWPrivateKey.h>
 // #include <TrustWalletCore/TWPublicKey.h>
-// #include <TrustWalletCore/TWMnemonic.h>
 // #include <TrustWalletCore/TWBase58.h>
 // #include <TrustWalletCore/TWCoinType.h>
 import "C"
