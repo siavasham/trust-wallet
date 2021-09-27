@@ -104,7 +104,7 @@ func main() {
     "fil" : C.TWCoinTypeFilecoin ,
     "egld" : C.TWCoinTypeElrond ,
     "band" : C.TWCoinTypeBandChain ,
-    "smartchain":TWCoinTypeSmartChain,
+    "smartchain":C.TWCoinTypeSmartChain,
     "bsc" : C.TWCoinTypeSmartChainLegacy };
 
     str := TWStringCreateWithGoString("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair")
