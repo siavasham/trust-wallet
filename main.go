@@ -1,5 +1,4 @@
 package main
-	
 import "os"
 // #cgo CFLAGS: -I/wallet-core/include
 // #cgo LDFLAGS: -L/wallet-core/build -L/wallet-core/build/trezor-crypto -lTrustWalletCore -lprotobuf -lTrezorCrypto -lc++ -lm
@@ -116,7 +115,7 @@ func main() {
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    key := C.TWHDWalletGetDerivedKey(wallet, types[coin], 0, 0 ,index )
+    key := TWStringCreateWithGoString(C.TWHDWalletGetDerivedKey(wallet, types[coin], 0, 0 ,index ))
     keyData := C.TWPrivateKeyData(key)
     keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
     fmt.Println("private key: ", keyHex)
