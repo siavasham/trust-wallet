@@ -115,24 +115,14 @@ func main() {
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    // key := C.TWHDWalletGetDerivedKey(wallet, types[coin], 0, 0 ,index )
-    // keyData := C.TWPrivateKeyData(key)
-    // keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
-    // fmt.Println("private key: ", keyHex)
+    key := C.TWHDWalletGetDerivedKey(wallet, types[coin], 0, 0 ,0 )
+    keyData := C.TWPrivateKeyData(key)
+    keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
+    fmt.Println("private key: ", keyHex)
 
     // address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], keyHex));
     // fmt.Println("address:", TWStringGoString(address))
 
-    key := C.TWHDWalletGetKeyForCoin(wallet, types[coin])
-    keyData := C.TWPrivateKeyData(key)
-    keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
-    fmt.Println("<== bitcoin private key: ", keyHex)
-
-    pubKey, _ := hex.DecodeString("0288be7586c41a0498c1f931a0aaf08c15811ee2651a5fe0fa213167dcaba59ae8")
-    pubKeyData := TWDataCreateWithGoBytes(pubKey)
-    defer C.TWDataDelete(pubKeyData)
-
-    fmt.Println("<== bitcoin public key is valid: ", C.TWPublicKeyIsValid(pubKeyData, C.TWPublicKeyTypeSECP256k1))
 
     address := C.TWHDWalletGetAddressForCoin(wallet, types[coin])
     fmt.Println("<== bitcoin address: ", TWStringGoString(address))
