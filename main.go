@@ -1,5 +1,4 @@
 package main
-import "os"
 // #cgo CFLAGS: -I/wallet-core/include
 // #cgo LDFLAGS: -L/wallet-core/build -L/wallet-core/build/trezor-crypto -lTrustWalletCore -lprotobuf -lTrezorCrypto -lc++ -lm
 // #include <TrustWalletCore/TWHDWallet.h>
@@ -11,6 +10,7 @@ import "C"
 import "fmt"
 import "unsafe"
 import "encoding/hex"
+import "os"
 
 // C.TWString -> Go string
 func TWStringGoString(s unsafe.Pointer) string {
