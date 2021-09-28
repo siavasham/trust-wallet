@@ -7,8 +7,75 @@ package main
 // #include <TrustWalletCore/TWData.h>
 // #include <TrustWalletCore/TWPrivateKey.h>
 // #include <TrustWalletCore/TWPublicKey.h>
+// #include <TrustWalletCore/TWMnemonic.h>
 // #include <TrustWalletCore/TWBase58.h>
 // #include <TrustWalletCore/TWCoinType.h>
+
+// #include <TrustWalletCore/TWBase.h>
+// #include <TrustWalletCore/TWFoundationData.h>
+// #include <TrustWalletCore/TWFoundationString.h>
+// #include <TrustWalletCore/TWBitcoin.h>
+// #include <TrustWalletCore/TWBitcoinOpCodes.h>
+// #include <TrustWalletCore/TWAES.h>
+// #include <TrustWalletCore/TWAccount.h>
+// #include <TrustWalletCore/TWAionAddress.h>
+// #include <TrustWalletCore/TWAionSigner.h>
+// #include <TrustWalletCore/TWBech32Address.h>
+// #include <TrustWalletCore/TWBinanceSigner.h>
+// #include <TrustWalletCore/TWBitcoinAddress.h>
+// #include <TrustWalletCore/TWBitcoinCashAddress.h>
+// #include <TrustWalletCore/TWBitcoinScript.h>
+// #include <TrustWalletCore/TWBitcoinTransactionSigner.h>
+// #include <TrustWalletCore/TWCoinTypeConfiguration.h>
+// #include <TrustWalletCore/TWCosmosAddress.h>
+// #include <TrustWalletCore/TWCosmosSigner.h>
+// #include <TrustWalletCore/TWCurve.h>
+// #include <TrustWalletCore/TWDecredAddress.h>
+// #include <TrustWalletCore/TWDecredSigner.h>
+// #include <TrustWalletCore/TWEthereumAddress.h>
+// #include <TrustWalletCore/TWEthereumChainID.h>
+// #include <TrustWalletCore/TWEthereumSigner.h>
+// #include <TrustWalletCore/TWGroestlcoinAddress.h>
+// #include <TrustWalletCore/TWGroestlcoinTransactionSigner.h>
+// #include <TrustWalletCore/TWHDVersion.h>
+// #include <TrustWalletCore/TWHDWallet.h>
+// #include <TrustWalletCore/TWHRP.h>
+// #include <TrustWalletCore/TWHash.h>
+// #include <TrustWalletCore/TWIOSTAccount.h>
+// #include <TrustWalletCore/TWIOSTSigner.h>
+// #include <TrustWalletCore/TWIconAddress.h>
+// #include <TrustWalletCore/TWIconAddressType.h>
+// #include <TrustWalletCore/TWIconSigner.h>
+// #include <TrustWalletCore/TWIocoinAddress.h>
+// #include <TrustWalletCore/TWKeyDerivation.h>
+// #include <TrustWalletCore/TWNEOAddress.h>
+// #include <TrustWalletCore/TWNimiqAddress.h>
+// #include <TrustWalletCore/TWNimiqSigner.h>
+// #include <TrustWalletCore/TWOntologyAddress.h>
+// #include <TrustWalletCore/TWOntologySigner.h>
+// #include <TrustWalletCore/TWP2PKHPrefix.h>
+// #include <TrustWalletCore/TWP2SHPrefix.h>
+// #include <TrustWalletCore/TWPrivateKey.h>
+// #include <TrustWalletCore/TWPublicKey.h>
+// #include <TrustWalletCore/TWPurpose.h>
+// #include <TrustWalletCore/TWRippleAddress.h>
+// #include <TrustWalletCore/TWRippleSigner.h>
+// #include <TrustWalletCore/TWStellarAddress.h>
+// #include <TrustWalletCore/TWStellarMemoType.h>
+// #include <TrustWalletCore/TWStellarPassphrase.h>
+// #include <TrustWalletCore/TWStellarSigner.h>
+// #include <TrustWalletCore/TWStellarVersionByte.h>
+// #include <TrustWalletCore/TWStoredKey.h>
+// #include <TrustWalletCore/TWTezosAddress.h>
+// #include <TrustWalletCore/TWTezosSigner.h>
+// #include <TrustWalletCore/TWThetaSigner.h>
+// #include <TrustWalletCore/TWTronAddress.h>
+// #include <TrustWalletCore/TWTronSigner.h>
+// #include <TrustWalletCore/TWVeChainSigner.h>
+// #include <TrustWalletCore/TWWanchainAddress.h>
+// #include <TrustWalletCore/TWWanchainSigner.h>
+// #include <TrustWalletCore/TWZcashTAddress.h>
+// #include <TrustWalletCore/TWZcashTransactionSigner.h>
 import "C"
 import "fmt"
 import "unsafe"
@@ -118,11 +185,11 @@ func main() {
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    fmt.Println( C.TWHDWalletGetDerivedKey(wallet, types[coin], 0, 0 ,0 ))
-    // defer C.free(unsafe.Pointer(key))
-    // keyData := C.TWPrivateKeyData(key)
-    // keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
-    // fmt.Println("private key: ", keyHex)
+    key = C.TWHDWalletGetDerivedKey(wallet, types[coin], 0, 0 ,0 )
+    defer C.free(unsafe.Pointer(key))
+    keyData := C.TWPrivateKeyData(key)
+    keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
+    fmt.Println("private key: ", keyHex)
 
     // address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], keyHex));
     // fmt.Println("address:", TWStringGoString(address))
