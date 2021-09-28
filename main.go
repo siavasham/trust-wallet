@@ -138,19 +138,9 @@ func main() {
 	pubKeyData := TWDataCreateWithGoBytes(pubKey)
 	defer C.TWDataDelete(pubKeyData)
 	fmt.Println("public key : ", pubKeyData)
-    
-    pkey := C.TWHDWalletGetKeyForCoin(wallet, C.TWCoinTypeBitcoin)
-	pkeyData := C.TWPrivateKeyData(pkey)
-	defer C.TWDataDelete(pkeyData)
 
-	fmt.Println("<== bitcoin private key: ", TWDataHexString(pkeyData))
 
-	cpubKey, _ := hex.DecodeString(TWDataHexString(pkeyData))
-	cpubKeyData := TWDataCreateWithGoBytes(cpubKey)
-	defer C.TWDataDelete(cpubKeyData)
-	fmt.Println("==> bitcoin public key is valid: ", cpubKeyData)
-
-    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], key))
+    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddressFromPublicKey(types[coin], pubKey))
     fmt.Println("address:", address)
 
 
