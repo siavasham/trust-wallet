@@ -12,9 +12,8 @@ package main
 import "C"
 import "fmt"
 import "unsafe"
-import ""tw/types"
 // import "strconv"
-// import "encoding/hex"
+import "encoding/hex"
 import "os"
 
 // C.TWString -> Go string
@@ -133,7 +132,7 @@ func main() {
     key := C.TWHDWalletGetKeyForCoin(wallet, types[coin])
 	keyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(keyData)
-	fmt.Println("private key: ", types.TWDataHexString(keyData))
+	fmt.Println("private key: ",hex.EncodeToString(TWDataGoBytes(keyData))
 
     address := C.TWCoinTypeDeriveAddress(types[coin], key)
     fmt.Println("address:", address)
