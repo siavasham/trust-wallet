@@ -136,7 +136,7 @@ func main() {
     fmt.Println("keyHex:", keyHex)
 
     xkey := C.TWHDWalletGetKeyForCoin(wallet,types[coin])
-	xkeyData := C.TWPrivateKeyData(key)
+	xkeyData := C.TWPrivateKeyData(xkey)
 	defer C.TWDataDelete(xkeyData)
 
 	fmt.Println("<== bitcoin private key: ", hex.EncodeToString(TWDataGoBytes(xkeyData)))
