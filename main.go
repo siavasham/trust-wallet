@@ -135,9 +135,9 @@ func main() {
     fmt.Println("private key :", keyHex)
 
     pubKey, _ := C.TWPrivateKeyGetPublicKeySecp256k1(key,true)
-	pubKeyData := TWDataCreateWithGoBytes(pubKey)
-	defer C.TWDataDelete(pubKeyData)
-	fmt.Println("public key : ", pubKeyData)
+	// pubKeyData := TWDataCreateWithGoBytes(pubKey)
+	// defer C.TWDataDelete(pubKeyData)
+	fmt.Println("public key : ", pubKey)
 
 
     address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddressFromPublicKey(types[coin], pubKey))
