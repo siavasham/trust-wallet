@@ -131,17 +131,11 @@ func main() {
     key := C.TWHDWalletGetKeyBIP44(wallet, types[coin], 0, 0 ,index)
 	keyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(keyData)
-    keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
+    keyHex := TWDataHexString(keyData)
     fmt.Println("keyData:", keyData)
     fmt.Println("keyHex:", keyHex)
 
-    xkey := C.TWHDWalletGetKeyForCoin(wallet,types[coin])
-	xkeyData := C.TWPrivateKeyData(xkey)
-	defer C.TWDataDelete(xkeyData)
-
-	fmt.Println("<== bitcoin private key: ", hex.EncodeToString(TWDataGoBytes(xkeyData)))
-
-    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], key))
+    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], keyData))
     fmt.Println("address:", address)
 
 
