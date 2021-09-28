@@ -14,7 +14,6 @@ import "fmt"
 import "unsafe"
 import "strconv"
 import "encoding/hex"
-import "tw/types"
 import "os"
 
 // C.TWString -> Go string
@@ -43,6 +42,11 @@ func TWDataCreateWithGoBytes(d []byte) unsafe.Pointer {
     defer C.free(unsafe.Pointer(cBytes))
     data := C.TWDataCreateWithBytes((*C.uchar)(cBytes), C.ulong(len(d)))
     return data
+}
+
+// C.TWData -> Go hex string
+func TWDataHexString(d unsafe.Pointer) string {
+	return hex.EncodeToString(TWDataGoBytes(d))
 }
 
 func main() {
@@ -135,7 +139,7 @@ func main() {
 	xkeyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(xkeyData)
 
-	fmt.Println("<== bitcoin private key: ", types.TWDataHexString(xkeyData))
+	fmt.Println("<== bitcoin private key: ", ex.EncodeToString(TWDataGoBytes(xkeyData)))
 
     address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], key))
     fmt.Println("address:", address)
