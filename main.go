@@ -130,8 +130,7 @@ func main() {
     fmt.Println("keyData:", keyData)
     fmt.Println("keyHex:", keyHex)
 
-
-    address := C.TWCoinTypeDeriveAddress(types[coin], key)
+    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], key))
     fmt.Println("address:", address)
 
 
