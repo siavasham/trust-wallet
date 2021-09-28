@@ -12,7 +12,8 @@ package main
 import "C"
 import "fmt"
 import "unsafe"
-import "encoding/hex"
+import "strconv"
+// import "encoding/hex"
 import "os"
 
 // C.TWString -> Go string
