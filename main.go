@@ -47,6 +47,9 @@ func TWDataCreateWithGoBytes(d []byte) unsafe.Pointer {
 func main() {
     coin := os.Args[1]
     n , err := strconv.ParseUint(os.Args[2], 10, 32)
+    if err != nil {
+        fmt.Println(err)
+    }
     index := C.uint(n)
 
     types := map[string]uint32{
