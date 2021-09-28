@@ -123,7 +123,7 @@ func main() {
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    key := C.TWHDWalletGetKeyBIP44(wallet, types[coin], 0, 0 ,index)
+    key := C.TWHDWalletGetKeyBIP44(wallet, C.TWCoinTypeEthereum, 0, 0 ,index)
 	keyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(keyData)
     keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
