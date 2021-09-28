@@ -12,7 +12,7 @@ package main
 import "C"
 import "fmt"
 import "unsafe"
-// import "strconv"
+import "strconv"
 import "encoding/hex"
 import "os"
 
@@ -46,11 +46,11 @@ func TWDataCreateWithGoBytes(d []byte) unsafe.Pointer {
 
 func main() {
     coin := os.Args[1]
-    // n , err := strconv.ParseUint(os.Args[2], 10, 32)
-    // if err != nil {
-    //     fmt.Println(err)
-    // }
-    // index := C.uint(n)
+    n , err := strconv.ParseUint(os.Args[2], 10, 32)
+    if err != nil {
+        fmt.Println(err)
+    }
+    index := C.uint(n)
 
     types := map[string]uint32{
     "ae":C.TWCoinTypeAeternity ,
@@ -123,16 +123,13 @@ func main() {
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    // key := C.TWHDWalletGetKeyBIP44(wallet, types[coin], 0, 0 ,0 )
-	// keyData := C.TWPrivateKeyData(key)
-	// defer C.TWDataDelete(keyData)
-    // keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
-    // fmt.Println("keyHex:", keyHex)
-    key := C.TWHDWalletGetKeyForCoin(wallet, types[coin])
+    key := C.TWHDWalletGetKeyBIP44(wallet, types[coin], 0, 0 ,index)
 	keyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(keyData)
+    keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
     fmt.Println("keyData:", keyData)
-	fmt.Println("private key: ",hex.EncodeToString(TWDataGoBytes(keyData)))
+    fmt.Println("keyHex:", keyHex)
+
 
     address := C.TWCoinTypeDeriveAddress(types[coin], key)
     fmt.Println("address:", address)
