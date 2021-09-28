@@ -132,7 +132,7 @@ func main() {
     key := C.TWHDWalletGetKeyForCoin(wallet, types[coin])
 	keyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(keyData)
-	fmt.Println("private key: ",hex.EncodeToString(TWDataGoBytes(keyData))
+	fmt.Println("private key: ",hex.EncodeToString(TWDataGoBytes(keyData)))
 
     address := C.TWCoinTypeDeriveAddress(types[coin], key)
     fmt.Println("address:", address)
