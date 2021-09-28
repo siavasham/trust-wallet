@@ -123,7 +123,7 @@ func main() {
     // keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
 
     address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], key));
-    fmt.Println("address:", TWStringGoString(address))
+    fmt.Println("address:", address)
 
 
 }
