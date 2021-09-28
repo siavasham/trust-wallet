@@ -13,7 +13,7 @@ import "C"
 import "fmt"
 import "unsafe"
 import "strconv"
-// import "encoding/hex"
+import "encoding/hex"
 import "os"
 
 // C.TWString -> Go string
