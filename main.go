@@ -132,10 +132,15 @@ func main() {
 	keyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(keyData)
     keyHex := TWDataHexString(keyData)
-    fmt.Println("keyData:", keyData)
-    fmt.Println("keyHex:", keyHex)
+    fmt.Println("private key :", keyHex)
 
-    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], keyData))
+    pubKey, _ := hex.DecodeString(keyData)
+	pubKeyData := TWDataCreateWithGoBytes(pubKey)
+	defer C.TWDataDelete(pubKeyData)
+	fmt.Println("public key : ", pubKeyData)
+
+
+    address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], key))
     fmt.Println("address:", address)
 
 
