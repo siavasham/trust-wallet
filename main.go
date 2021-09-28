@@ -139,7 +139,7 @@ func main() {
 	xkeyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(xkeyData)
 
-	fmt.Println("<== bitcoin private key: ", ex.EncodeToString(TWDataGoBytes(xkeyData)))
+	fmt.Println("<== bitcoin private key: ", hex.EncodeToString(TWDataGoBytes(xkeyData)))
 
     address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], key))
     fmt.Println("address:", address)
