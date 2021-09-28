@@ -124,8 +124,9 @@ func main() {
     defer C.TWHDWalletDelete(wallet)
 
     key := C.TWHDWalletGetKeyBIP44(wallet, types[coin], 0, 0 ,index )
-    keyData := C.TWPrivateKeyData(key)
-    keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
+	keyData := C.TWPrivateKeyData(key)
+	defer C.TWDataDelete(keyData)
+    keyHex := hex.EncodeToString(keyData)
     fmt.Println("keyData:", keyData)
     fmt.Println("keyHex:", keyHex)
 
