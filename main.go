@@ -14,6 +14,7 @@ import "fmt"
 import "unsafe"
 import "strconv"
 import "encoding/hex"
+import "tw/types"
 import "os"
 
 // C.TWString -> Go string
@@ -123,12 +124,18 @@ func main() {
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    key := C.TWHDWalletGetKeyBIP44(wallet, C.TWCoinTypeEthereum, 0, 0 ,index)
+    key := C.TWHDWalletGetKeyBIP44(wallet, types[coin], 0, 0 ,index)
 	keyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(keyData)
     keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
     fmt.Println("keyData:", keyData)
     fmt.Println("keyHex:", keyHex)
+
+    xkey := C.TWHDWalletGetKeyForCoin(wallet,types[coin])
+	xkeyData := C.TWPrivateKeyData(key)
+	defer C.TWDataDelete(xkeyData)
+
+	fmt.Println("<== bitcoin private key: ", types.TWDataHexString(xkeyData))
 
     address := C.TWStringUTF8Bytes(C.TWCoinTypeDeriveAddress(types[coin], key))
     fmt.Println("address:", address)
