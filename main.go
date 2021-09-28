@@ -13,7 +13,7 @@ import "C"
 import "fmt"
 import "unsafe"
 import "strconv"
-import "encoding/hex"
+// import "encoding/hex"
 import "os"
 
 // C.TWString -> Go string
@@ -123,12 +123,12 @@ func main() {
     wallet := C.TWHDWalletCreateWithMnemonic(str, emtpy)
     defer C.TWHDWalletDelete(wallet)
 
-    key := C.TWHDWalletGetKeyBIP44(wallet, types[coin], 0, 0 ,index )
+    key := C.TWHDWalletGetKeyBIP44(wallet, types[coin], 0, 0 ,0 )
 	keyData := C.TWPrivateKeyData(key)
 	defer C.TWDataDelete(keyData)
-    keyHex := hex.EncodeToString(keyData)
+    // keyHex := hex.EncodeToString(TWDataGoBytes(keyData))
     fmt.Println("keyData:", keyData)
-    fmt.Println("keyHex:", keyHex)
+    // fmt.Println("keyHex:", keyHex)
 
     address := C.TWCoinTypeDeriveAddress(types[coin], key)
     fmt.Println("address:", address)
