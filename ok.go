@@ -11,7 +11,6 @@ package main
 // #include <TrustWalletCore/TWBase58.h>
 // #include <TrustWalletCore/TWCoinType.h>
 
-// #include <TrustWalletCore/TWBase.h>
 // #include <TrustWalletCore/TWFoundationData.h>
 // #include <TrustWalletCore/TWFoundationString.h>
 // #include <TrustWalletCore/TWBitcoin.h>
