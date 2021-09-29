@@ -13,16 +13,15 @@
 
 #include <iostream>
 #include <string>
-
+#include <map>
 using namespace std;
 
-class Coins {       
-  public:             
-    int btc = TWCoinType::TWCoinTypeBitcoin;        
-    int etc = TWCoinType::TWCoinTypeEthereum;        
-};
+
 int main(int argc,char* argv[]) {
-    Coins coins ;
+    const std::map<std::string, TWCoinType> coins
+    {
+        {"btc", TWCoinType::TWCoinTypeBitcoin}, {"etc", TWCoinType::TWCoinTypeEthereu}
+    };
     TWHDWallet* walletImp = nullptr;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
