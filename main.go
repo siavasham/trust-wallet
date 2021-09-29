@@ -136,9 +136,7 @@ func main() {
     fmt.Println("private key :", keyHex)
 
 	pubKey, _ := C.TWPrivateKeyGetPublicKeyEd25519(key)
-	pubKeyData := TWDataCreateWithGoBytes(pubKey)
-	defer C.TWDataDelete(pubKeyData)
-	fmt.Println("public key : ", pubKeyData)
+	fmt.Println("public key : ", pubKey)
 
 
 
