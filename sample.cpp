@@ -29,7 +29,7 @@ int main(int argc,char* argv[]) {
     TWStringDelete(secretMnemonic);
     
     const TWCoinType coinType = (TWCoinType) coins.at(argv[1]);
-    int userId = atoi(argv[2])
+    int userId = atoi(argv[2]);
     string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
     string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
     cout << coinName <<   argv[2] << endl;
