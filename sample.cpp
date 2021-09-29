@@ -18,7 +18,7 @@ using namespace std;
 
 
 int main(int argc,char* argv[]) {
-    const std::map<std::string, TWCoinType> coins
+    const std::map<std::string, int> coins
     {
         {"btc", TWCoinType::TWCoinTypeBitcoin}, {"etc", TWCoinType::TWCoinTypeEthereum}
     };
