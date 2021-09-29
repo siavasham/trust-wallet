@@ -28,19 +28,14 @@ int main(int argc,char* argv[]) {
     TWStringDelete(secretMnemonic);
     
     const TWCoinType coinType = (TWCoinType) coins.at(argv[1]);
-    cout << "Working with coin: " <<
-        TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType)) << " " <<
-        TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType)) << endl;
+    
+    const coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
+    const coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
 
-    // Derive default address.
-    cout << "Obtaining default address ... ";
-    string address = TWStringUTF8Bytes(TWHDWalletGetAddressForCoin(walletImp, coinType));
-    cout << " done." << endl;
-    cout << "Default address:          '" << address << "'" << endl;
+    const auto privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0, 0);
+    const auto privateKeyData = TWPrivateKeyData(privateKey);
+    cout << "private data:  " << privateKeyData << endl;
 
-    // Alternative: Derive address using default derivation path.
-    // Done in 2 steps: derive private key, then address from private key.
-    // Note that private key is passed around between the two calls by the wallet -- be always cautious when handling secrets, avoid the risk of leaking secrets.
     cout << "Default derivation path:  " << TWStringUTF8Bytes(TWCoinTypeDerivationPath(coinType)) << endl;
     TWPrivateKey* secretPrivateKeyDefault = TWHDWalletGetKeyForCoin(walletImp, coinType);
     string addressDefault = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, secretPrivateKeyDefault));
