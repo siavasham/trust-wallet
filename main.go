@@ -9,6 +9,7 @@ package main
 // #include <TrustWalletCore/TWPublicKey.h>
 // #include <TrustWalletCore/TWBase58.h>
 // #include <TrustWalletCore/TWCoinType.h>
+// #include <TrustWalletCore/TWAnyAddress.h>
 import "C"
 import "fmt"
 import "unsafe"
