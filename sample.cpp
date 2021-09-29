@@ -29,11 +29,11 @@ int main(int argc,char* argv[]) {
     
     const TWCoinType coinType = (TWCoinType) coins.at(argv[1]);
     
-    const coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
-    const coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
+    string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
+    string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
 
-    const auto privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0, 0);
-    const auto privateKeyData = TWPrivateKeyData(privateKey);
+    string privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0, 0);
+    string privateKeyData = TWPrivateKeyData(privateKey);
     cout << "private data:  " << privateKeyData << endl;
 
     cout << "Default derivation path:  " << TWStringUTF8Bytes(TWCoinTypeDerivationPath(coinType)) << endl;
