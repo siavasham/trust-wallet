@@ -20,7 +20,7 @@ using namespace std;
 int main(int argc,char* argv[]) {
     const std::map<std::string, TWCoinType> coins
     {
-        {"btc", TWCoinType::TWCoinTypeBitcoin}, {"etc", TWCoinType::TWCoinTypeEthereu}
+        {"btc", TWCoinType::TWCoinTypeBitcoin}, {"etc", TWCoinType::TWCoinTypeEthereum}
     };
     TWHDWallet* walletImp = nullptr;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
