@@ -135,7 +135,7 @@ func main() {
     keyHex := TWDataHexString(keyData)
     fmt.Println("private key :", keyHex)
 
-	pubKey, _ := C.TWPrivateKeyGetPublicKeyEd25519(key)
+	pubKey, _ := C.TWPrivateKeyGetPublicKeySecp256k1(key)
 	fmt.Println("public key : ", pubKey)
 
 
