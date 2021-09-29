@@ -143,7 +143,7 @@ func main() {
     address := C.TWAnyAddressCreateWithPublicKey( pubKey,types[coin])
     defer C.TWAnyAddressDelete(address)
     // addressStr := C.TWAnyAddressCreateWithString( address,types[coin])
-    fmt.Println("address:", address)
+    fmt.Println("address:", TWStringGoString(address))
 
 
 }
