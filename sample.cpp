@@ -21,7 +21,67 @@ using namespace std;
 int main(int argc,char* argv[]) {
     const std::map<std::string, int> coins
     {
-        {"btc", TWCoinType::TWCoinTypeBitcoin}, {"eth", TWCoinType::TWCoinTypeEthereum}
+        {"ae",TWCoinType::TWCoinTypeAeternity },
+        {"aion" , TWCoinType::TWCoinTypeAion },
+        {"bnb" , TWCoinType::TWCoinTypeBinance },
+        {"btc" , TWCoinType::TWCoinTypeBitcoin },
+        {"bch" , TWCoinType::TWCoinTypeBitcoinCash },
+        {"btg" , TWCoinType::TWCoinTypeBitcoinGold },
+        {"clo" , TWCoinType::TWCoinTypeCallisto },
+        {"ada" , TWCoinType::TWCoinTypeCardano ,} 
+        {"atom" , TWCoinType::TWCoinTypeCosmos },
+        {"dash" , TWCoinType::TWCoinTypeDash },
+        {"dcr" , TWCoinType::TWCoinTypeDecred },
+        {"dgb" ,  TWCoinType::TWCoinTypeDigiByte },
+        {"doge" , TWCoinType::TWCoinTypeDogecoin },
+        {"eos" , TWCoinType::TWCoinTypeEOS },
+        {"eth" , TWCoinType::TWCoinTypeEthereum },
+        {"etc" , TWCoinType::TWCoinTypeEthereumClassic },
+        {"fio" , TWCoinType::TWCoinTypeFIO },
+        {"go" , TWCoinType::TWCoinTypeGoChain },
+        {"grs" , TWCoinType::TWCoinTypeGroestlcoin },
+        {"icx" , TWCoinType::TWCoinTypeICON },
+        {"iotx" , TWCoinType::TWCoinTypeIoTeX },
+        {"kava" , TWCoinType::TWCoinTypeKava },
+        {"kin" , TWCoinType::TWCoinTypeKin },
+        {"ltc" , TWCoinType::TWCoinTypeLitecoin },
+        {"mona" , TWCoinType::TWCoinTypeMonacoin },
+        {"nas" , TWCoinType::TWCoinTypeNebulas },
+        {"nuls" , TWCoinType::TWCoinTypeNULS },
+        {"nano" , TWCoinType::TWCoinTypeNano },
+        {"near" , TWCoinType::TWCoinTypeNEAR },
+        {"nim" , TWCoinType::TWCoinTypeNimiq },
+        {"ont" , TWCoinType::TWCoinTypeOntology },
+        {"poa" , TWCoinType::TWCoinTypePOANetwork },
+        {"qtum" , TWCoinType::TWCoinTypeQtum },
+        {"xrp" , TWCoinType::TWCoinTypeXRP },
+        {"sol" , TWCoinType::TWCoinTypeSolana },
+        {"xlm" , TWCoinType::TWCoinTypeStellar },
+        {"xtz" , TWCoinType::TWCoinTypeTezos },
+        {"theta" , TWCoinType::TWCoinTypeTheta },
+        {"tt" , TWCoinType::TWCoinTypeThunderToken },
+        {"neo" , TWCoinType::TWCoinTypeNEO },
+        {"tomo" , TWCoinType::TWCoinTypeTomoChain },
+        {"trx" , TWCoinType::TWCoinTypeTron },
+        {"vet" , TWCoinType::TWCoinTypeVeChain },
+        {"via" , TWCoinType::TWCoinTypeViacoin },
+        {"wan" , TWCoinType::TWCoinTypeWanchain },
+        {"zec" , TWCoinType::TWCoinTypeZcash },
+        {"firo" , TWCoinType::TWCoinTypeZcoin },
+        {"zil" , TWCoinType::TWCoinTypeZilliqa },
+        {"zel" , TWCoinType::TWCoinTypeZelcash },
+        {"rvn" , TWCoinType::TWCoinTypeRavencoin },
+        {"waves" , TWCoinType::TWCoinTypeWaves },
+        {"luna" , TWCoinType::TWCoinTypeTerra },
+        {"one" , TWCoinType::TWCoinTypeHarmony },
+        {"algo" , TWCoinType::TWCoinTypeAlgorand },
+        {"ksm" , TWCoinType::TWCoinTypeKusama },
+        {"dot" , TWCoinType::TWCoinTypePolkadot },
+        {"fil" , TWCoinType::TWCoinTypeFilecoin },
+        {"egld" , TWCoinType::TWCoinTypeElrond },
+        {"band" , TWCoinType::TWCoinTypeBandChain },
+        {"smartchain",TWCoinType::TWCoinTypeSmartChain},
+        {"bsc" , TWCoinType::TWCoinTypeSmartChainLegac}y
     };
     TWHDWallet* walletImp = nullptr;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
@@ -32,10 +92,9 @@ int main(int argc,char* argv[]) {
     int userId = atoi(argv[2]);
     string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
     string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
-    cout << coinName <<   argv[2] << endl;
     TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,userId);
     string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
-    cout << "address: '" << address << "'" << endl;
+    cout << "address:" << address << endl;
 
 
     // cout << "Default derivation path:  " << TWStringUTF8Bytes(TWCoinTypeDerivationPath(coinType)) << endl;
