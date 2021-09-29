@@ -28,7 +28,7 @@ int main(int argc,char* argv[]) {
         {"bch" , TWCoinType::TWCoinTypeBitcoinCash },
         {"btg" , TWCoinType::TWCoinTypeBitcoinGold },
         {"clo" , TWCoinType::TWCoinTypeCallisto },
-        {"ada" , TWCoinType::TWCoinTypeCardano ,} 
+        {"ada" , TWCoinType::TWCoinTypeCardano ,} ,
         {"atom" , TWCoinType::TWCoinTypeCosmos },
         {"dash" , TWCoinType::TWCoinTypeDash },
         {"dcr" , TWCoinType::TWCoinTypeDecred },
