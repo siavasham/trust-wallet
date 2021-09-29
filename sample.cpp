@@ -29,7 +29,7 @@ int main(int argc,char* argv[]) {
     
     cout << "Default address:          '" << argv[0] << "'" << endl;
 
-    const TWCoinType coinType = coins[argv[0]];
+    const TWCoinType coinType = TWCoinType::TWCoinTypeBitcoin;
     cout << "Working with coin: " <<
         TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType)) << " " <<
         TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType)) << endl;
