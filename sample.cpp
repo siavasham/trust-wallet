@@ -81,7 +81,7 @@ int main(int argc,char* argv[]) {
         {"egld" , TWCoinType::TWCoinTypeElrond },
         {"band" , TWCoinType::TWCoinTypeBandChain },
         {"smartchain",TWCoinType::TWCoinTypeSmartChain},
-        {"bsc" , TWCoinType::TWCoinTypeSmartChainLegac}
+        {"bsc" , TWCoinType::TWCoinTypeSmartChainLegacy}
     };
     TWHDWallet* walletImp = nullptr;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
