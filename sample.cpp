@@ -22,7 +22,7 @@ class Coins {
     int etc = TWCoinType::TWCoinTypeEthereum;        
 };
 int main(int argc,char* argv[]) {
-    Coins coins;
+    coins = new Coins ;
     TWHDWallet* walletImp = nullptr;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
