@@ -15,7 +15,6 @@
 #include <string>
 #include <map>
 using namespace std;
-using namespace TW ;
 
 int main(int argc,char* argv[]) {
     const std::map<std::string, int> coins
@@ -33,8 +32,9 @@ int main(int argc,char* argv[]) {
     string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
 
     TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0, 0);
-    string privateKeyData = TWPrivateKeyData(privateKey);
-    cout << "private data:  " << privateKeyData << endl;
+    string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
+    cout << "xxxx from default key: '" << address << "'" << endl;
+
 
     cout << "Default derivation path:  " << TWStringUTF8Bytes(TWCoinTypeDerivationPath(coinType)) << endl;
     TWPrivateKey* secretPrivateKeyDefault = TWHDWalletGetKeyForCoin(walletImp, coinType);
