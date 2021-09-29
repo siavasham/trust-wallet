@@ -30,24 +30,24 @@ int main(int argc,char* argv[]) {
     
     string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
     string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
-
-    TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0, 0);
+    cout << coinName <<  (int) argv[2] << endl;
+    TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0, (int) argv[2]);
     string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
-    cout << "xxxx from default key: '" << address << "'" << endl;
+    cout << "address: '" << address << "'" << endl;
 
 
-    cout << "Default derivation path:  " << TWStringUTF8Bytes(TWCoinTypeDerivationPath(coinType)) << endl;
-    TWPrivateKey* secretPrivateKeyDefault = TWHDWalletGetKeyForCoin(walletImp, coinType);
-    string addressDefault = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, secretPrivateKeyDefault));
-    cout << "Address from default key: '" << addressDefault << "'" << endl;
+    // cout << "Default derivation path:  " << TWStringUTF8Bytes(TWCoinTypeDerivationPath(coinType)) << endl;
+    // TWPrivateKey* secretPrivateKeyDefault = TWHDWalletGetKeyForCoin(walletImp, coinType);
+    // string addressDefault = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, secretPrivateKeyDefault));
+    // cout << "Address from default key: '" << addressDefault << "'" << endl;
 
-    // Alternative: Derive address using custom derivation path.  Done in 2 steps: derive private key, then address.
-    auto customDerivationPath = TWStringCreateWithUTF8Bytes("m/44'/60'/1'/0/0");
-    TWPrivateKey* secretPrivateKeyCustom = TWHDWalletGetKey(walletImp, coinType, customDerivationPath);
-    TWStringDelete(customDerivationPath);
-    string addressCustom = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, secretPrivateKeyCustom));
-    cout << "Custom-derived address:   '" << addressCustom << "'" << endl;
-    cout << endl;
+    // // Alternative: Derive address using custom derivation path.  Done in 2 steps: derive private key, then address.
+    // auto customDerivationPath = TWStringCreateWithUTF8Bytes("m/44'/60'/1'/0/0");
+    // TWPrivateKey* secretPrivateKeyCustom = TWHDWalletGetKey(walletImp, coinType, customDerivationPath);
+    // TWStringDelete(customDerivationPath);
+    // string addressCustom = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, secretPrivateKeyCustom));
+    // cout << "Custom-derived address:   '" << addressCustom << "'" << endl;
+    // cout << endl;
 
     TWHDWalletDelete(walletImp);
 }
