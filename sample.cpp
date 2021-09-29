@@ -32,7 +32,7 @@ int main(int argc,char* argv[]) {
     string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
     string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
 
-    string privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0, 0);
+    TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0, 0);
     string privateKeyData = TWPrivateKeyData(privateKey);
     cout << "private data:  " << privateKeyData << endl;
 
