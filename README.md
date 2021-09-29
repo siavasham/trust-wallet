@@ -1,10 +1,9 @@
-# Sample Go Integration for [Wallet-Core](https://github.com/trustwallet/wallet-core)
+# Sample C++ Application for [Wallet-Core](https://github.com/trustwallet/wallet-core)
 
 ## Overview
 
-This folder contains a small **Go** sample integration with
-[Wallet Core](https://github.com/trustwallet/wallet-core) library (part of [Trust Wallet](https://trustwallet.com)),
-using [cgo](https://golang.org/cmd/cgo/).
+This repository contains a simple but complete **C++** sample application, for demostrating usage of the
+[Wallet Core](https://github.com/trustwallet/wallet-core) library (part of [Trust Wallet](https://trustwallet.com)).
 
 ## DISCLAIMER
 
@@ -22,29 +21,46 @@ and [Build Instructions](https://developer.trustwallet.com/wallet-core/building)
 
 ## Prerequisites
 
-* Docker
+You need to download and build WalletCore yourself
+(there is no official binary distribution).
+The dependencies TrezorCrypto and protobuf are also needed, these are also come with WalletCore.
+You need to [build](https://developer.trustwallet.com/wallet-core/building) the library.
+
 
 ## Building and Running
 
-1. Run `docker run -it trustwallet/wallet-core`
-The librabry is already built in this image  (Build instructions [here](building.md))  Note: may not be the most recent version.
-
-2. Install go: `apt-get update && apt-get install golang` 
-(or download from here [go1.14.2](https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz), configure `GOROOT` and append `GOROOT/bin` to `PATH`).
-3. Go to the **samples/go** folder within wallet core repo:
+Go to the **samples/cpp** folder within wallet core repo:
 
 ```shell
 git clone https://github.com/trustwallet/wallet-core.git
-cd wallet-core/samples/go
+cd wallet-core/samples/cpp
 ```
 
-4. Compile it by `go build -o main`.  Relavant source file is `main.go`.
-
-5. Run `./main` and you will see the output below: 
+Configure and build -- path to the top-level Wallet Core library folder is needed:
 
 ```shell
-==> calling wallet core from go
-==> mnemonic is valid:  true
-==> bitcoin...
+cmake . -DWALLET_CORE=../../
+make
 ```
-6. You might want to copy and run `main` outside of the docker container, make sure you have `libc++1` and `libc++abi1` installed in your host Ubuntu.
+
+Run it:
+
+```shell
+./sample
+```
+
+The relavant sample code is in the file `cpp/sample.cpp`.
+
+# What it Does
+
+An overview of the operations done in the sample app is as follows.
+
+* Import a wallet
+  * Create a wallet by importing an existing recovery phrase (mnemonic), using HDWallet.
+* Derive address
+  * Address is derived from the HD wallet.
+* Create send transaction
+  * put together a send transaction (contains sender and receiver address, amount, etc.)
+  * sign this transaction (using the private key)
+
+See the [Integration Guide](https://developer.trustwallet.com/wallet-core/integration-guide).
