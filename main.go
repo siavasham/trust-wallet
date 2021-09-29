@@ -135,7 +135,7 @@ func main() {
     keyHex := TWDataHexString(keyData)
     fmt.Println("private key :", keyHex)
 
-	pubKey, _ := hex.DecodeString(keyHex)
+	pubKey, _ := C.TWPrivateKeyGetPublicKeyEd25519(key)
 	pubKeyData := TWDataCreateWithGoBytes(pubKey)
 	defer C.TWDataDelete(pubKeyData)
 	fmt.Println("public key : ", pubKeyData)
