@@ -15,7 +15,7 @@
 #include <string>
 #include <map>
 using namespace std;
-
+using namespace TW ;
 
 int main(int argc,char* argv[]) {
     const std::map<std::string, int> coins
@@ -47,9 +47,6 @@ int main(int argc,char* argv[]) {
     TWStringDelete(customDerivationPath);
     string addressCustom = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, secretPrivateKeyCustom));
     cout << "Custom-derived address:   '" << addressCustom << "'" << endl;
-    cout << endl;
-
-    cout << "RECEIVE funds: Perform send from somewehere else to this address:   " << address << " ." << endl;
     cout << endl;
 
     TWHDWalletDelete(walletImp);
