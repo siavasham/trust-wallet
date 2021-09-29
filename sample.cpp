@@ -32,7 +32,7 @@ int main(int argc,char* argv[]) {
     
     string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
     string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
-    cout << coinName <<  (int) argv[2] << endl;
+    cout << coinName <<   argv[2] << endl;
     TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0, (int) argv[2]);
     string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
     cout << "address: '" << address << "'" << endl;
