@@ -27,7 +27,7 @@ int main(int argc,char* argv[]) {
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     TWStringDelete(secretMnemonic);
     
-    cout << "Default address:          '" << argv[0] << "'" << endl;
+    cout << "args:          '" << argv[1] << "'" << endl;
 
     const TWCoinType coinType = TWCoinType::TWCoinTypeBitcoin;
     cout << "Working with coin: " <<
