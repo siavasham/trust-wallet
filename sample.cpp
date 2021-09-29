@@ -20,16 +20,14 @@ using namespace std;
 int main(int argc,char* argv[]) {
     const std::map<std::string, int> coins
     {
-        {"btc", TWCoinType::TWCoinTypeBitcoin}, {"etc", TWCoinType::TWCoinTypeEthereum}
+        {"btc", TWCoinType::TWCoinTypeBitcoin}, {"eth", TWCoinType::TWCoinTypeEthereum}
     };
     TWHDWallet* walletImp = nullptr;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     TWStringDelete(secretMnemonic);
     
-    cout << "args:          '" << coins.at(argv[1]) << "'" << endl;
-
-    const TWCoinType coinType = TWCoinType::TWCoinTypeBitcoin;
+    const TWCoinType coinType = (TWCoinType) coins.at(argv[1]);
     cout << "Working with coin: " <<
         TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType)) << " " <<
         TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType)) << endl;
