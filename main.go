@@ -142,7 +142,7 @@ func main() {
 
 
 
-    address := C.TWStringUTF8Bytes(C.TWAnyAddressCreateWithPublicKey( pubKey,types[coin]))
+    address := C.TWStringUTF8Bytes(C.TWAnyAddressCreateWithPublicKey( pubKeyData,types[coin]))
     fmt.Println("address:", address)
 
 
