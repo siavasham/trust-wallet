@@ -14,6 +14,7 @@
 #include <nlohmann/json.hpp>
   
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <map>
 #include <cstdlib>
@@ -105,9 +106,9 @@ int main(int argc,char* argv[]) {
         }
         j[p.first] = JsonObjects;
     }
-    std::ofstream o("address.json");
-    o << std::setw(4) << j << std::endl;
- 
+    ofstream MyFile("address.json");
+    MyFile << j.dump();
+    MyFile.close();
  
 
     TWHDWalletDelete(walletImp);
