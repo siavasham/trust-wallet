@@ -105,8 +105,10 @@ int main(int argc,char* argv[]) {
         }
         j[p.first] = JsonObjects;
     }
-
-    std::cout << j.dump() << std::endl;
+    std::ofstream o("address.json");
+    o << std::setw(4) << j << std::endl;
+ 
+ 
 
     TWHDWalletDelete(walletImp);
 }
