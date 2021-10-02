@@ -89,14 +89,14 @@ int main(int argc,char* argv[]) {
     TWStringDelete(secretMnemonic);
     
     for ( const pair<std::string, int> &p : coins ) {
-        //p.first
+        //
         const TWCoinType coinType = (TWCoinType) p.second;
         int userId = 0;
         string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
         string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
         TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,userId);
         string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
-        cout << "address:" << address << endl;
+        cout << p.first << ":" << address << endl;
     }
 
 
