@@ -101,7 +101,7 @@ int main(int argc,char* argv[]) {
             string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
             TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,i);
             string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
-            JsonObjects.append(address);
+            JsonObjects.push_back(address);
         }
         j[p.first] = JsonObjects;
     }
