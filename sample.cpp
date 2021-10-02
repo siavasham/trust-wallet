@@ -93,7 +93,7 @@ int main(int argc,char* argv[]) {
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     TWStringDelete(secretMnemonic);
     
-    int size = 10;
+    int size = atoi(argv[1]);
     for ( const pair<std::string, int> &p : coins ) {
         const TWCoinType coinType = (TWCoinType) p.second;
        json JsonObjects = json::array();
