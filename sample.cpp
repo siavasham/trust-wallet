@@ -95,15 +95,15 @@ int main(int argc,char* argv[]) {
     int size = 10;
     for ( const pair<std::string, int> &p : coins ) {
         const TWCoinType coinType = (TWCoinType) p.second;
-        string arr[size];
+       json JsonObjects = json::array();
         for(int i=0;i<size;i++){
             string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
             string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
             TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,i);
             string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
-            arr[i] = address;
+            JsonObjects.append(address);
         }
-        j[p.first] = p.second;
+        j[p.first] = JsonObjects;
     }
 
     std::cout << j.dump() << std::endl;
