@@ -23,6 +23,8 @@
 using namespace std;
 
 int main(int argc,char* argv[]) {
+    boost::property_tree::ptree pt;
+
     const std::map<std::string, int> coins
     {
         {"ae",TWCoinType::TWCoinTypeAeternity },
@@ -92,22 +94,20 @@ int main(int argc,char* argv[]) {
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     TWStringDelete(secretMnemonic);
     
+    int size = 10;
     for ( const pair<std::string, int> &p : coins ) {
-        //
         const TWCoinType coinType = (TWCoinType) p.second;
-        int userId = 0;
-        string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
-        string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
-        TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,userId);
-        string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
-        cout << p.first << ":" << address << endl;
+        string arr[size];
+        for(int i=0;i<size;i++){
+            string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
+            string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
+            TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,i);
+            string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
+            arr[i] = address
+        }
+        pt.put(p.first , arr);
     }
 
-boost::property_tree::ptree pt;
-    pt.put("Test", "string");
-    pt.put("Test2.inner0", "string2");
-    pt.put("Test2.inner1", "string3");
-    pt.put("Test2.inner2", 1234);
 
     std::stringstream ss;
     boost::property_tree::json_parser::write_json(ss, pt);
