@@ -11,20 +11,18 @@
 #include <TrustWalletCore/TWPrivateKey.h>
 #include <TrustWalletCore/TWString.h>
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/optional.hpp>
-
+#include <nlohmann/json.hpp>
+  
 #include <iostream>
 #include <string>
 #include <map>
 #include <cstdlib>
 
 using namespace std;
+using json = nlohmann::json;
 
 int main(int argc,char* argv[]) {
-    boost::property_tree::ptree pt;
-
+    json j;
     const std::map<std::string, int> coins
     {
         {"ae",TWCoinType::TWCoinTypeAeternity },
@@ -105,14 +103,10 @@ int main(int argc,char* argv[]) {
             string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
             arr[i] = address;
         }
-        pt.put(p.first , arr);
+        j[p.first] = arr;
     }
 
-
-    std::stringstream ss;
-    boost::property_tree::json_parser::write_json(ss, pt);
-
-    std::cout << ss.str() << std::endl;
+    std::cout << j.dump() << std::endl;
 
     TWHDWalletDelete(walletImp);
 }
