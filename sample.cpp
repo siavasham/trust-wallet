@@ -11,6 +11,10 @@
 #include <TrustWalletCore/TWPrivateKey.h>
 #include <TrustWalletCore/TWString.h>
 
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/optional.hpp>
+
 #include <iostream>
 #include <string>
 #include <map>
@@ -99,6 +103,16 @@ int main(int argc,char* argv[]) {
         cout << p.first << ":" << address << endl;
     }
 
+boost::property_tree::ptree pt;
+    pt.put("Test", "string");
+    pt.put("Test2.inner0", "string2");
+    pt.put("Test2.inner1", "string3");
+    pt.put("Test2.inner2", 1234);
+
+    std::stringstream ss;
+    boost::property_tree::json_parser::write_json(ss, pt);
+
+    std::cout << ss.str() << std::endl;
 
     TWHDWalletDelete(walletImp);
 }
