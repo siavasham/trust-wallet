@@ -103,7 +103,7 @@ int main(int argc,char* argv[]) {
             string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
             arr[i] = address;
         }
-        j[(string)p.first] = arr;
+        j[p.first] = p.second;
     }
 
     std::cout << j.dump() << std::endl;
