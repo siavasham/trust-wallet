@@ -85,8 +85,14 @@ int main(int argc,char* argv[]) {
         {"fil" , TWCoinType::TWCoinTypeFilecoin },
         {"egld" , TWCoinType::TWCoinTypeElrond },
         {"band" , TWCoinType::TWCoinTypeBandChain },
-        {"smartchain",TWCoinType::TWCoinTypeSmartChain},
+        {"bnb2",TWCoinType::TWCoinTypeSmartChain},
         {"bsc" , TWCoinType::TWCoinTypeSmartChainLegacy}
+        // {"oasis" , TWCoinType::TWCoinTypeOasis},
+        // {"matic" , TWCoinType::TWCoinTypePolygon},
+        // {"ftm" , TWCoinType::TWCoinTypeFantom},
+        // {"rune" , TWCoinType::TWCoinTypeTHORChain},
+        // {"avax" , TWCoinType::TWCoinTypeAvalancheCChain},
+        // {"arb" , TWCoinType::TWCoinTypeArbitrum}
     };
     TWHDWallet* walletImp = nullptr;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
