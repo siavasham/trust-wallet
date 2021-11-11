@@ -11,19 +11,14 @@
 #include <TrustWalletCore/TWPrivateKey.h>
 #include <TrustWalletCore/TWString.h>
 
-#include <nlohmann/json.hpp>
-  
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <map>
 #include <cstdlib>
 
 using namespace std;
-using json = nlohmann::json;
 
 int main(int argc,char* argv[]) {
-    json j;
     const std::map<std::string, int> coins
     {
         {"ae",TWCoinType::TWCoinTypeAeternity },
@@ -85,37 +80,35 @@ int main(int argc,char* argv[]) {
         {"fil" , TWCoinType::TWCoinTypeFilecoin },
         {"egld" , TWCoinType::TWCoinTypeElrond },
         {"band" , TWCoinType::TWCoinTypeBandChain },
-        {"bnb2",TWCoinType::TWCoinTypeSmartChain},
+        {"smartchain",TWCoinType::TWCoinTypeSmartChain},
         {"bsc" , TWCoinType::TWCoinTypeSmartChainLegacy}
-        // {"oasis" , TWCoinType::TWCoinTypeOasis},
-        // {"matic" , TWCoinType::TWCoinTypePolygon},
-        // {"ftm" , TWCoinType::TWCoinTypeFantom},
-        // {"rune" , TWCoinType::TWCoinTypeTHORChain},
-        // {"avax" , TWCoinType::TWCoinTypeAvalancheCChain},
-        // {"arb" , TWCoinType::TWCoinTypeArbitrum}
     };
     TWHDWallet* walletImp = nullptr;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     TWStringDelete(secretMnemonic);
     
-    int size = atoi(argv[1]);
-    for ( const pair<std::string, int> &p : coins ) {
-        const TWCoinType coinType = (TWCoinType) p.second;
-       json JsonObjects = json::array();
-        for(int i=0;i<size;i++){
-            string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
-            string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
-            TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,i);
-            string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
-            JsonObjects.push_back(address);
-        }
-        j[p.first] = JsonObjects;
-    }
-    ofstream MyFile("address.json");
-    MyFile << j.dump();
-    MyFile.close();
- 
+    const TWCoinType coinType = (TWCoinType) coins.at(argv[1]);
+    int userId = atoi(argv[2]);
+    string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
+    string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
+    TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,userId);
+    string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
+    cout << "address:" << address << endl;
+
+
+    // cout << "Default derivation path:  " << TWStringUTF8Bytes(TWCoinTypeDerivationPath(coinType)) << endl;
+    // TWPrivateKey* secretPrivateKeyDefault = TWHDWalletGetKeyForCoin(walletImp, coinType);
+    // string addressDefault = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, secretPrivateKeyDefault));
+    // cout << "Address from default key: '" << addressDefault << "'" << endl;
+
+    // // Alternative: Derive address using custom derivation path.  Done in 2 steps: derive private key, then address.
+    // auto customDerivationPath = TWStringCreateWithUTF8Bytes("m/44'/60'/1'/0/0");
+    // TWPrivateKey* secretPrivateKeyCustom = TWHDWalletGetKey(walletImp, coinType, customDerivationPath);
+    // TWStringDelete(customDerivationPath);
+    // string addressCustom = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, secretPrivateKeyCustom));
+    // cout << "Custom-derived address:   '" << addressCustom << "'" << endl;
+    // cout << endl;
 
     TWHDWalletDelete(walletImp);
 }
