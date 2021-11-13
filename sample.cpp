@@ -3,6 +3,7 @@
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
 // file LICENSE at the root of the source code distribution tree.
+#include "json.hpp"
 
 #include <TrustWalletCore/TWCoinType.h>
 #include <TrustWalletCore/TWAnySigner.h>
@@ -16,10 +17,11 @@
 #include <map>
 #include <cstdlib>
 
+using json = nlohmann::json;
 using namespace std;
 
 int main(int argc,char* argv[]) {
-    const std::map<std::string, int> coins
+    const map<string, int> coins
     {
         {"ae",TWCoinType::TWCoinTypeAeternity },
         {"aion" , TWCoinType::TWCoinTypeAion },
@@ -80,8 +82,8 @@ int main(int argc,char* argv[]) {
         {"fil" , TWCoinType::TWCoinTypeFilecoin },
         {"egld" , TWCoinType::TWCoinTypeElrond },
         {"band" , TWCoinType::TWCoinTypeBandChain },
-        {"smartchain",TWCoinType::TWCoinTypeSmartChain},
-        {"bsc" , TWCoinType::TWCoinTypeSmartChainLegacy}
+        {"bsc",TWCoinType::TWCoinTypeSmartChain},
+        {"bep20" , TWCoinType::TWCoinTypeSmartChainLegacy}
     };
     TWHDWallet* walletImp = nullptr;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
@@ -94,8 +96,10 @@ int main(int argc,char* argv[]) {
     string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
     TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,userId);
     string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
-    cout << "address:" << address << endl;
 
+    const map<string, string> out {{"address", address}};
+    json j = out;
+    cout << j << endl;
 
     // cout << "Default derivation path:  " << TWStringUTF8Bytes(TWCoinTypeDerivationPath(coinType)) << endl;
     // TWPrivateKey* secretPrivateKeyDefault = TWHDWalletGetKeyForCoin(walletImp, coinType);
