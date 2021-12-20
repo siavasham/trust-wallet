@@ -99,8 +99,8 @@ int main(int argc,char* argv[]) {
         menomic.replace(startPosition, from.length(), to);
         pos += to.length();
     }
-    auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic+"");
-    // walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
+    // auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
+    walletImp = TWHDWalletCreateWithMnemonic(menomic, TWStringCreateWithUTF8Bytes(""));
     // TWStringDelete(secretMnemonic);
     
     // const TWCoinType coinType = (TWCoinType) coins.at(argv[1]);
