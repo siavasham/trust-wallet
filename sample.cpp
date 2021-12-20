@@ -88,7 +88,7 @@ int main(int argc,char* argv[]) {
     };
     TWHDWallet* walletImp = nullptr;
     string pmenomic = string argv[2];
-    string menomic = replace(pmenomic.begin(), pmenomic.end(), '-', '.')
+    string menomic = replace(pmenomic.begin(), pmenomic.end(), '-', '.');
 
     auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
