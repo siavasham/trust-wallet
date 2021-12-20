@@ -99,8 +99,9 @@ int main(int argc,char* argv[]) {
         menomic.replace(startPosition, from.length(), to);
         pos += to.length();
     }
-    
-    auto secretMnemonic = menomic;
+    array<Byte>^ encodedBytes = Encoding::UTF8->GetBytes(menomic);
+
+    auto secretMnemonic = TWStringCreateWithUTF8Bytes(encodedBytes);
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     TWStringDelete(secretMnemonic);
     
