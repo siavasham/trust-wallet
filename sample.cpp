@@ -89,8 +89,8 @@ int main(int argc,char* argv[]) {
     TWHDWallet* walletImp = nullptr;
     string menomic =  argv[2];
     auto pos = 0;
-    string from  = '-';
-    string to = '.';
+    string from  = "-";
+    string to = ".";
     while(true)
     {
         size_t startPosition = menomic.find(from, pos);
