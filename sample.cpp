@@ -84,9 +84,13 @@ int main(int argc,char* argv[]) {
         {"band" , TWCoinType::TWCoinTypeBandChain },
         {"bsc",TWCoinType::TWCoinTypeSmartChain},
         {"bep20" , TWCoinType::TWCoinTypeSmartChainLegacy}
+        {"ftm" , TWCoinType::TWCoinTypeFantom}
     };
     TWHDWallet* walletImp = nullptr;
-    auto secretMnemonic = TWStringCreateWithUTF8Bytes("prefer exclude easy faith army artwork pencil tortoise fashion vague interest hair");
+    string pmenomic = string argv[2];
+    string menomic = replace(pmenomic.begin(), pmenomic.end(), '-', '.')
+
+    auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     TWStringDelete(secretMnemonic);
     
