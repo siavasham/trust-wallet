@@ -21,6 +21,18 @@ using json = nlohmann::json;
 using namespace std;
 
 int main(int argc,char* argv[]) {
+    void replace(string& input, const string& from, const string& to)
+    {
+        auto pos = 0;
+        while(true)
+        {
+            size_t startPosition = input.find(from, pos);
+            if(startPosition == string::npos)
+                return;
+            input.replace(startPosition, from.length(), to);
+            pos += to.length();
+        }
+    }
     const map<string, int> coins
     {
         {"ae",TWCoinType::TWCoinTypeAeternity },
@@ -83,12 +95,12 @@ int main(int argc,char* argv[]) {
         {"egld" , TWCoinType::TWCoinTypeElrond },
         {"band" , TWCoinType::TWCoinTypeBandChain },
         {"bsc",TWCoinType::TWCoinTypeSmartChain},
-        {"bep20" , TWCoinType::TWCoinTypeSmartChainLegacy}
+        {"bep20" , TWCoinType::TWCoinTypeSmartChainLegacy},
         {"ftm" , TWCoinType::TWCoinTypeFantom}
     };
     TWHDWallet* walletImp = nullptr;
-    string pmenomic =  argv[2];
-    string menomic = replace(pmenomic.begin(), pmenomic.end(), '-', '.');
+    string replace =  argv[2];
+    replace(replace, '-', '.');
 
     auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
