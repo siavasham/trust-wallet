@@ -95,8 +95,7 @@ int main(int argc,char* argv[]) {
         {"egld" , TWCoinType::TWCoinTypeElrond },
         {"band" , TWCoinType::TWCoinTypeBandChain },
         {"bsc",TWCoinType::TWCoinTypeSmartChain},
-        {"bep20" , TWCoinType::TWCoinTypeSmartChainLegacy},
-        {"ftm" , TWCoinType::TWCoinTypeFantom}
+        {"bep20" , TWCoinType::TWCoinTypeSmartChainLegacy}
     };
     TWHDWallet* walletImp = nullptr;
     string menomic =  argv[2];
