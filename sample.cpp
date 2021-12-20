@@ -87,7 +87,7 @@ int main(int argc,char* argv[]) {
         {"ftm" , TWCoinType::TWCoinTypeFantom}
     };
     TWHDWallet* walletImp = nullptr;
-    string pmenomic = string argv[2];
+    string pmenomic =  argv[2];
     string menomic = replace(pmenomic.begin(), pmenomic.end(), '-', '.');
 
     auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
