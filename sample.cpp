@@ -99,7 +99,8 @@ int main(int argc,char* argv[]) {
         menomic.replace(startPosition, from.length(), to);
         pos += to.length();
     }
-    auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
+    string secret = TWStringUTF8Bytes(menomic);
+    auto secretMnemonic = TWStringCreateWithUTF8Bytes(secret);
     // walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     // TWStringDelete(secretMnemonic);
     
