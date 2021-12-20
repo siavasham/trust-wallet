@@ -100,8 +100,8 @@ int main(int argc,char* argv[]) {
     }
     unsigned char buffer[menomic.length()];
     memcpy(buffer, menomic.data(), menomic.length());
-cout << buffer << endl;
-    // auto secretMnemonic = TWStringCreateWithUTF8Bytes(buffer);
+    auto secretMnemonic = TWStringCreateWithUTF8Bytes(buffer);
+    cout << secretMnemonic << endl;
     // walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     // TWStringDelete(secretMnemonic);
     
