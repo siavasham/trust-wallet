@@ -19,18 +19,7 @@
 
 using json = nlohmann::json;
 using namespace std;
- void xreplace(string& input, const string& from, const string& to)
-{
-    auto pos = 0;
-    while(true)
-    {
-        size_t startPosition = input.find(from, pos);
-        if(startPosition == string::npos)
-            return;
-        input.replace(startPosition, from.length(), to);
-        pos += to.length();
-    }
-}
+
 int main(int argc,char* argv[]) {
    
     const map<string, int> coins
@@ -99,7 +88,17 @@ int main(int argc,char* argv[]) {
     };
     TWHDWallet* walletImp = nullptr;
     string menomic =  argv[2];
-    xreplace(menomic, '-', '.');
+    auto pos = 0;
+    string from  = '-';
+    string to = '.';
+    while(true)
+    {
+        size_t startPosition = menomic.find(from, pos);
+        if(startPosition == string::npos)
+            return;
+        menomic.replace(startPosition, from.length(), to);
+        pos += to.length();
+    }
 
     auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
