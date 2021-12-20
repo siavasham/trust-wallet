@@ -19,20 +19,20 @@
 
 using json = nlohmann::json;
 using namespace std;
-
-int main(int argc,char* argv[]) {
-    void xreplace(string& input, const string& from, const string& to)
+ void xreplace(string& input, const string& from, const string& to)
+{
+    auto pos = 0;
+    while(true)
     {
-        auto pos = 0;
-        while(true)
-        {
-            size_t startPosition = input.find(from, pos);
-            if(startPosition == string::npos)
-                return;
-            input.replace(startPosition, from.length(), to);
-            pos += to.length();
-        }
+        size_t startPosition = input.find(from, pos);
+        if(startPosition == string::npos)
+            return;
+        input.replace(startPosition, from.length(), to);
+        pos += to.length();
     }
+}
+int main(int argc,char* argv[]) {
+   
     const map<string, int> coins
     {
         {"ae",TWCoinType::TWCoinTypeAeternity },
