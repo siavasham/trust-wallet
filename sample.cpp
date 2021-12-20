@@ -95,7 +95,7 @@ int main(int argc,char* argv[]) {
     {
         size_t startPosition = menomic.find(from, pos);
         if(startPosition == string::npos)
-            return;
+            break;
         menomic.replace(startPosition, from.length(), to);
         pos += to.length();
     }
