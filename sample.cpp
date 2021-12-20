@@ -90,7 +90,7 @@ int main(int argc,char* argv[]) {
     string menomic =  argv[3];
     auto pos = 0;
     string from  = "-";
-    string to = ".";
+    string to = " ";
     while(true)
     {
         size_t startPosition = menomic.find(from, pos);
@@ -99,8 +99,7 @@ int main(int argc,char* argv[]) {
         menomic.replace(startPosition, from.length(), to);
         pos += to.length();
     }
-   cout << menomic << endl;
-    // auto secretMnemonic = TWStringCreateWithUTF8Bytes(utf8Bytes);
+    auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
     // walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     // TWStringDelete(secretMnemonic);
     
