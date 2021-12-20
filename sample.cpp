@@ -21,7 +21,7 @@ using json = nlohmann::json;
 using namespace std;
 
 int main(int argc,char* argv[]) {
-    void replace(string& input, const string& from, const string& to)
+    void xreplace(string& input, const string& from, const string& to)
     {
         auto pos = 0;
         while(true)
@@ -99,8 +99,8 @@ int main(int argc,char* argv[]) {
         {"ftm" , TWCoinType::TWCoinTypeFantom}
     };
     TWHDWallet* walletImp = nullptr;
-    string replace =  argv[2];
-    replace(replace, '-', '.');
+    string menomic =  argv[2];
+    xreplace(menomic, '-', '.');
 
     auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
     walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
