@@ -87,20 +87,15 @@ int main(int argc,char* argv[]) {
     };
     TWHDWallet* walletImp = nullptr;
     auto menomic =  argv[3];
-    auto pos = 0;
-    string from  = "-";
-    string to = " ";
-    while(true)
+    for(int i = 0; i <= menomic.Length; i++)
     {
-        size_t startPosition = menomic.find(from, pos);
-        if(startPosition == string::npos)
-            break;
-        menomic.replace(startPosition, from.length(), to);
-        pos += to.length();
+        if(menomic[i] == '-')
+        {
+            menomic[i] = ' ';
+        }
     }
-
+    cout << menomic << endl;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
-    // cout << menomic << endl;
     // walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     // TWStringDelete(secretMnemonic);
     
