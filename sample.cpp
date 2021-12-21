@@ -86,7 +86,7 @@ int main(int argc,char* argv[]) {
         {"bep20" , TWCoinType::TWCoinTypeSmartChainLegacy}
     };
     TWHDWallet* walletImp = nullptr;
-    auto menomic =  menomic;
+    auto menomic =  argv[3];
     auto pos = 0;
     string from  = "-";
     string to = " ";
