@@ -87,13 +87,8 @@ int main(int argc,char* argv[]) {
     };
     TWHDWallet* walletImp = nullptr;
     auto menomic =  argv[3];
-    for(int i = 0; i <= menomic.Length; i++)
-    {
-        if(menomic[i] == '-')
-        {
-            menomic[i] = ' ';
-        }
-    }
+    replace( menomic, menomic+strlen(menomic), '-', ' ' );
+
     cout << menomic << endl;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
     // walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
