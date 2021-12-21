@@ -86,6 +86,7 @@ int main(int argc,char* argv[]) {
         {"bep20" , TWCoinType::TWCoinTypeSmartChainLegacy}
     };
     TWHDWallet* walletImp = nullptr;
+    auto menomic =  argv[3];
     auto pos = 0;
     string from  = "-";
     string to = " ";
@@ -99,7 +100,7 @@ int main(int argc,char* argv[]) {
     }
 
     auto secretMnemonic = TWStringCreateWithUTF8Bytes(argv[3]);
-    cout << argv[3] << endl;
+    // cout << argv[3] << endl;
     // walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     // TWStringDelete(secretMnemonic);
     
