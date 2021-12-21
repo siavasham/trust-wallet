@@ -88,22 +88,20 @@ int main(int argc,char* argv[]) {
     TWHDWallet* walletImp = nullptr;
     auto menomic =  argv[3];
     replace( menomic, menomic+strlen(menomic), '-', ' ' );
-
-    cout << menomic << endl;
     auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
-    // walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
-    // TWStringDelete(secretMnemonic);
+    walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
+    TWStringDelete(secretMnemonic);
     
-    // const TWCoinType coinType = (TWCoinType) coins.at(argv[1]);
-    // int userId = atoi(argv[2]);
-    // string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
-    // string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
-    // TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,userId);
-    // string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
+    const TWCoinType coinType = (TWCoinType) coins.at(argv[1]);
+    int userId = atoi(argv[2]);
+    string coinName  = TWStringUTF8Bytes(TWCoinTypeConfigurationGetName(coinType));
+    string coinsymbl = TWStringUTF8Bytes(TWCoinTypeConfigurationGetSymbol(coinType));
+    TWPrivateKey* privateKey = TWHDWalletGetKeyBIP44(walletImp, coinType, 0, 0,userId);
+    string address = TWStringUTF8Bytes(TWCoinTypeDeriveAddress(coinType, privateKey));
 
-    // const map<string, string> out {{"address", address}};
-    // json j = out;
-    // cout << j << endl;
+    const map<string, string> out {{"address", address}};
+    json j = out;
+    cout << j << endl;
 
     // cout << "Default derivation path:  " << TWStringUTF8Bytes(TWCoinTypeDerivationPath(coinType)) << endl;
     // TWPrivateKey* secretPrivateKeyDefault = TWHDWalletGetKeyForCoin(walletImp, coinType);
@@ -118,5 +116,5 @@ int main(int argc,char* argv[]) {
     // cout << "Custom-derived address:   '" << addressCustom << "'" << endl;
     // cout << endl;
 
-    // TWHDWalletDelete(walletImp);
+    TWHDWalletDelete(walletImp);
 }
