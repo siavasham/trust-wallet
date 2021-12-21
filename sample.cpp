@@ -86,21 +86,21 @@ int main(int argc,char* argv[]) {
         {"bep20" , TWCoinType::TWCoinTypeSmartChainLegacy}
     };
     TWHDWallet* walletImp = nullptr;
-    auto menomic =  argv[3];
+    auto menomic =  menomic;
     auto pos = 0;
     string from  = "-";
     string to = " ";
     while(true)
     {
-        size_t startPosition = argv[3].find(from, pos);
+        size_t startPosition = menomic.find(from, pos);
         if(startPosition == string::npos)
             break;
-        argv[3].replace(startPosition, from.length(), to);
+        menomic.replace(startPosition, from.length(), to);
         pos += to.length();
     }
 
-    auto secretMnemonic = TWStringCreateWithUTF8Bytes(argv[3]);
-    // cout << argv[3] << endl;
+    auto secretMnemonic = TWStringCreateWithUTF8Bytes(menomic);
+    // cout << menomic << endl;
     // walletImp = TWHDWalletCreateWithMnemonic(secretMnemonic, TWStringCreateWithUTF8Bytes(""));
     // TWStringDelete(secretMnemonic);
     
