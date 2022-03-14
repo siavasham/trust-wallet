@@ -21,7 +21,7 @@ using json = nlohmann::json;
 using namespace std;
 
 int main(int argc,char* argv[]) {
-    auto j = json::parse({"happy": true, "pi": 3.141});
+    json j = "{ \"happy\": true, \"pi\": 3.141 }"_json;
     std::string s = j.dump();   
     std::cout << j.dump(4) << std::endl;
 }
