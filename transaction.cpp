@@ -21,6 +21,6 @@ using json = nlohmann::json;
 using namespace std;
 
 int main(int argc,char* argv[]) {
-   auto j = json::parse(R"(argv[1])");
+   auto j = json::parse(R"argv[1]");
 
 }
