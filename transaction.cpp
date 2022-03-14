@@ -21,6 +21,7 @@ using json = nlohmann::json;
 using namespace std;
 
 int main(int argc,char* argv[]) {
-   auto j = json::parse(argv[1]);
-
+    auto j = json::parse(R"({"happy": true, "pi": 3.141})");
+    std::string s = j.dump();   
+    std::cout << j.dump(4) << std::endl;
 }
