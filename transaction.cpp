@@ -21,6 +21,7 @@
 
 using json = nlohmann::json;
 using namespace std;
+using namespace TW::Tron;
 
 int main(int argc,char* argv[]) {
      TWHDWallet* walletImp = nullptr;
@@ -52,7 +53,7 @@ int main(int argc,char* argv[]) {
 
     input.set_private_key(secretPrivKey.bytes.data(), secretPrivKey.bytes.size());
 
-    const auto output = TW::Tron::Signer::sign(input);
+    const auto output = Signer::sign(input);
 
     auto signedTransaction = string(TWStringUTF8Bytes(output));
     cout  << signedTransaction << endl;
