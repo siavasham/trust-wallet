@@ -12,7 +12,7 @@
 #include <TrustWalletCore/TWString.h>
 
 #include <TrustWalletCore/TWAnySigner.h>
-#include "../../src/Tron/Signer.h"
+#include <../../src/Tron/Signer.h>
 
 #include <iostream>
 #include <string>
