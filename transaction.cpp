@@ -11,7 +11,6 @@
 #include <TrustWalletCore/TWPrivateKey.h>
 #include <TrustWalletCore/TWString.h>
 
-#include "proto/Tron.pb.h"
 #include <TrustWalletCore/TWAnySigner.h>
 
 #include <iostream>
