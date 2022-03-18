@@ -12,6 +12,7 @@
 #include <TrustWalletCore/TWString.h>
 
 #include <TrustWalletCore/TWAnySigner.h>
+#include <google/protobuf/util/json_util.h>
 
 #include <iostream>
 #include <string>
