@@ -52,7 +52,7 @@ int main(int argc,char* argv[]) {
     transfer.set_to_address(dest);
     transfer.set_amount(5);
 
-    input.set_private_key(secretPrivKey.bytes.data(), secretPrivKey.bytes.size());
+    input.set_private_key(privateKey);
 
     // const auto output = Signer::sign(input);
     // Proto::SigningOutput output;
