@@ -22,6 +22,7 @@
 using json = nlohmann::json;
 using namespace std;
 using namespace TW::Tron;
+using namespace TW::Hash;
 
 int main(int argc,char* argv[]) {
      TWHDWallet* walletImp = nullptr;
