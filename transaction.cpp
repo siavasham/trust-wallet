@@ -44,8 +44,8 @@ int main(int argc,char* argv[]) {
     auto secretPrivKey = TWPrivateKeyData(privateKey);
 
      string transaction = "{"
-                "\",\"toAddress\":\"" + dummyReceiverAddress +
-                "\",\"transaction\":{\"transfer\":{\"amount\":\"" + amountB64 +
+                "\",\"toAddress\":\"" + dest +
+                "\",\"transaction\":{\"transfer\":{\"amount\":\"" + 5 +
                 "\"}}}";            
             cout << "transaction: " << transaction << endl;
 
