@@ -12,7 +12,6 @@
 #include <TrustWalletCore/TWString.h>
 
 #include <TrustWalletCore/TWAnySigner.h>
-#include <../../src/Tron/Signer.h>
 
 #include <iostream>
 #include <string>
@@ -44,22 +43,23 @@ int main(int argc,char* argv[]) {
 
     auto secretPrivKey = TWPrivateKeyData(privateKey);
 
-    auto input = Proto::SigningInput();
-    auto& transaction = *input.mutable_transaction();
+     string transaction = "{"
+                "\",\"toAddress\":\"" + dummyReceiverAddress +
+                "\",\"transaction\":{\"transfer\":{\"amount\":\"" + amountB64 +
+                "\"}}}";            
+            cout << "transaction: " << transaction << endl;
 
-    auto& transfer = *transaction.mutable_transfer_asset();
-    transfer.set_owner_address(source);
-    transfer.set_to_address(dest);
-    transfer.set_amount(5);
+            cout << "signing transaction ... ";
 
-    input.set_private_key(privateKey);
-
-    // const auto output = Signer::sign(input);
-    // Proto::SigningOutput output;
-    // ANY_SIGN(input,  TWCoinType::TWCoinTypeTron);
-
-    // auto signedTransaction = string(TWStringUTF8Bytes(output));
-    // cout  << signedTransaction << endl;
+            auto json = TWStringCreateWithUTF8Bytes(transaction.c_str());
+            auto result = TWAnySignerSignJSON(json, secretPrivKey, coinType);
+            auto signedTransaction = string(TWStringUTF8Bytes(result));
+            cout << "done" << endl;
+            cout << "Signed transaction data (to be broadcast to network):  (len " << signedTransaction.length() << ") '" << signedTransaction << "'" << endl;
+            // see e.g. https://github.com/flightwallet/decode-eth-tx for checking binary output content
+            cout << endl;
+            TWStringDelete(json);
+            TWStringDelete(result);
     
 }
 
